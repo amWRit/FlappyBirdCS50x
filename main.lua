@@ -76,6 +76,7 @@ function love.load()
 	gStateMachine:change('title')
 
 	love.keyboard.keysPressed = {}
+	love.mouse.pressed = false
 end
 
 function love.resize(w,h)
@@ -94,6 +95,14 @@ function love.keyboard.wasPressed(key)
 	return love.keyboard.keysPressed[key]
 end
 
+function love.mousepressed(x, y, button)
+	love.mouse.pressed = true
+end
+
+function love.mouse.wasPressed()
+	return love.mouse.pressed
+end
+
 function love.update(dt)
 
 	backgroundScroll = (backgroundScroll + BACKGROUND_SCROLL_SPEED * dt) % BACKGROUND_LOOPING_POINT
@@ -101,6 +110,7 @@ function love.update(dt)
 
 	gStateMachine:update(dt)
 	love.keyboard.keysPressed = {}
+	love.mouse.pressed = false
 end
 
 function love.draw()
